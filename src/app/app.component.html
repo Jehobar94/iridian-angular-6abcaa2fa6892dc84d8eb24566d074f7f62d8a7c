@@ -1,0 +1,46 @@
+<div class="contenedor-formulario">
+  <h2> Formulario</h2>
+  <div [formGroup]="contactoForm" class="formulario">
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" type="text" formControlName="nombre" class="form-control" placeholder="Ingrese su nombre">
+    </div>
+    <div class="form-group">
+      <label for="apellido">Apellido</label>
+      <input id="apellido" type="text" formControlName="apellido" class="form-control"
+        placeholder="Ingrese su apellido">
+    </div>
+    <div class="form-group">
+      <label for="correo">Correo</label>
+      <input id="correo" type="text" formControlName="correo" class="form-control" placeholder="Ingrese su correo">
+      <div
+        *ngIf="contactoForm.get('correo')!.invalid && (contactoForm.get('correo')!.dirty || contactoForm.get('correo')!.touched)"
+        class="alert alert-danger">
+        Formato invalido. Ejem: (jose@gmail.com)
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="celular">Celular</label>
+      <input id="celular" type="text" formControlName="celular" class="form-control" placeholder="Ingrese su celular">
+    </div>
+    <div class="form-group">
+      <label for="areaContacto">Area de Contacto</label>
+      <select id="areaContacto" type="text" formControlName="areaContacto" class="form-control">
+        <option hidden [value]="''">Ingrese el area de contacto a la cual se quiere dirigir</option>
+        <option *ngFor="let area of areaContactoList" [value]="area.id">
+          {{area.nombre_area}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="mensaje">mensaje</label>
+      <textarea id="mensaje" formControlName="mensaje" class="form-control" placeholder="Ingrese su mensaje"></textarea>
+    </div>
+    <div class="contenedor-botones">
+      <button (click)="enviarFormulario()" class="btn btn-primary" [disabled]="!contactoForm.valid">Enviar</button>
+    </div>
+    <div *ngIf="mensajeRespuesta !=''" class="alert alert-success">
+      {{mensajeRespuesta}}
+    </div>
+  </div>
+</div>
